@@ -7,6 +7,7 @@ import pypinyin
 import requests
 from pathlib import Path
 import concurrent.futures
+import os
 
 TAGS = {
     "Anime": "动画",
@@ -89,10 +90,15 @@ class PlexServer:
         cfg = ConfigParser()
         self.s = requests.session()
 
-        cfg.read(config_file)
-        self.host = dict(cfg.items("server"))["address"]
-        self.token = dict(cfg.items("server"))["token"]
-        self.skip_libraries = dict(cfg.items("server"))["skip_libraries"].split('；')
+        # cfg.read(config_file)
+        # self.host = dict(cfg.items("server"))["address"]
+        # self.token = dict(cfg.items("server"))["token"]
+        # self.skip_libraries = dict(cfg.items("server"))["skip_libraries"].split('；')
+        self.host = os.getenv('PLEX_HOST')
+        self.token = os.getenv('PLEX_TOKEN')
+        self.skip_libraries = os.getenv('SKIP_LIBS').split('；')
+
+        print(f"host:{self.host} token:${self.token} skip_libs:${self.skip_libraries}")
         print(f"已成功连接到服务器: {self.login()}\n")
 
     def login(self):

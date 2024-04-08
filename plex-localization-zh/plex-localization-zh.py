@@ -395,6 +395,10 @@ class PlexServer:
                 print()
 
 if __name__ == '__main__':
-    plex_server = PlexServer()
-    plex_server.loop_all()
-    plex_server.loop_all_collections()
+    sleep_interval = int(os.getenv('LOOP_INTERVAL'))
+    print(f"sleep_interval:{sleep_interval}")
+    while(True):
+        plex_server = PlexServer()
+        plex_server.loop_all()
+        plex_server.loop_all_collections()
+        time.sleep(sleep_interval)

@@ -18,3 +18,8 @@ RUN pip3 install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 COPY . .
 
 CMD ["python3", "plex-localization-zh.py"]
+
+
+#build: docker build --tag plex-zh-plugin .
+#run: docker run -e PLEX_HOST="https://localhost:32400" -e PLEX_TOKEN="xxx" plex-zh-plugin
+
